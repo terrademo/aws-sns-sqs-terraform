@@ -1,0 +1,33 @@
+{
+    "Version": "2008-10-17",
+    "Id": "__default_policy_ID",
+    "Statement": [
+        {
+            "Sid": "__owner_statement",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "639095781608"
+            },
+            "Action": [
+                "SQS:*"
+            ],
+            "Resource": "arn:aws:sqs:us-east-1:639095781608:content_q"
+        },
+        {
+            "Sid": "Allow-SNS-SendMessage",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "sns.amazonaws.com"
+            },
+            "Action": [
+                "sqs:SendMessage"
+            ],
+            "Resource": "arn:aws:sqs:us-east-1:639095781608:content_q",
+            "Condition": {
+                "ArnEquals": {
+                    "aws:SourceArn": "arn:aws:sns:us-east-1:639095781608:content_topic"
+                }
+            }
+        }
+    ]
+}
